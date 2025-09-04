@@ -1,7 +1,7 @@
-import imagekit from "../configs/imageKit";
+import imagekit from "../configs/imageKit.js";
 import fs from 'fs';
 import Post from "../models/Post.js";
-import User from "../models/User";
+import User from "../models/User.js";
 
 //Add post
 export const addPost = async (req, res) => {
@@ -19,7 +19,7 @@ export const addPost = async (req, res) => {
                     const response = await imagekit.upload({
                         file: fileBuffer,
                         fileName: image.originalname,
-                        foldere:"posts",
+                        folder:"posts",
                     })
 
                     const url = imagekit.url({
