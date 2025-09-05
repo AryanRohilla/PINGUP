@@ -73,7 +73,7 @@ export const sendMessage = async (req,res)=>{
         const messageWithUserData = await Message.findById(message._id).populate('from_user_id');
 
         if(connections[to_user_id]){
-            connections[to_user_id].write(`data : ${JSON.stringify(messageWithUserData)}\n\n`)
+            connections[to_user_id].write(`data: ${JSON.stringify(messageWithUserData)}\n\n`)
         }
 
     } catch(error){
@@ -97,7 +97,7 @@ export const getChatMessages = async (req, res) =>{
         //mark messages as seen
         await Message.updateMany({from_user_id:to_user_id, to_user_id:userId}, {seen:true})
 
-        res.json({ success:true, messages});
+        res.json({ success:true, message});
     }catch(error){
         res.json({success:false, message:error.message});
     }
@@ -111,6 +111,6 @@ export const getUserRecentMessages = async(req,res)=>{
         res.json({success:true ,messages});
         
     } catch (error) {
-        res.json({success:false, message:error.message})
+        res.json({success:false, message:error.messages})
     }
 }
