@@ -8,7 +8,7 @@ import api from '../api/axios'
 import { useNavigate } from 'react-router-dom'
 
 const CreatePost = () => {
-
+ 
   const navigate = useNavigate()
   const [content, setContent] = useState('')
   const [images, setImages] = useState([])

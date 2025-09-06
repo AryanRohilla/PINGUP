@@ -5,7 +5,7 @@ const initialState = {
     connections:[],
     pendingConnections:[],
     followers:[],
-    following:[],
+    following:[]
 }
 
 export const fetchConnections = createAsyncThunk('connections/fetchConnections', async(token)=>{
@@ -15,7 +15,7 @@ export const fetchConnections = createAsyncThunk('connections/fetchConnections',
     return data.success ? data : null;
 })
 
-const connectionSlice = createSlice({
+const connectionsSlice = createSlice({
     name:'connections',
     initialState,
     reducers:{
@@ -34,4 +34,4 @@ const connectionSlice = createSlice({
     }
 })
 
-export default connectionSlice.reducer
+export default connectionsSlice.reducer

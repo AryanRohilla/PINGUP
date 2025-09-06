@@ -6,16 +6,16 @@ const initialState = {
     value:null
 }
 
-export const fetchUser = createAsyncThunk('user/fetchUser',async(token)=>{
+export const fetchUser = createAsyncThunk('user/fetchUser', async(token)=>{
     const { data } = await api.get('/api/user/data', {
-        headers:{Authorization:`Bearer ${token}`}
+        headers:{Authorization: `Bearer ${token}`}
     })
     return data.success ? data.user : null 
 })
 
 export const updateUser = createAsyncThunk('user/update',async({userData, token})=>{
     const { data } = await api.post('/api/user/update', userData, {
-        headers:{Authorization:`Bearer ${token}`}
+        headers: {Authorization:`Bearer ${token}`}
     })
     if(data.success){
         toast.success(data.message)

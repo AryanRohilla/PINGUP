@@ -13,8 +13,8 @@ import Layout from './pages/Layout.jsx'
 import { Toaster } from 'react-hot-toast'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { fetchUser } from './features/user/userSlice.js'
-import { fetchConnections } from './features/connections/connectionsSlice.js'
+import { fetchUser } from './features/user/userSlice'
+import { fetchConnections } from './features/connections/connectionsSlice'
 
 const App = () => {
   const { user } = useUser()
@@ -32,8 +32,8 @@ const App = () => {
     }
     fetchData()
   }, [user, getToken, dispatch])
+  
   return (
-
     <>
       <Toaster />
       <Routes>

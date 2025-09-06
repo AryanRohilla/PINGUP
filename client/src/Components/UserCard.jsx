@@ -38,7 +38,7 @@ const UserCard = ({user}) => {
 
         try {
             const { data } = await api.post('/api/user/connect', {id: user._id},{
-                headers : { Authorization: `Bearer ${await getToken()}`}
+                headers : { Authorization: `Bearer ${await getToken()}` }
             })
             if(data.success){
                 toast.success(data.message)
@@ -83,7 +83,6 @@ const UserCard = ({user}) => {
                     <Plus className='w-5 h-5 group-hover:scale-105 transition' />
                 }
             </button> 
-
         </div>
     </div>
   )

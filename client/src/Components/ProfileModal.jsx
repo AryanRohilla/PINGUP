@@ -21,7 +21,7 @@ const ProfileModal = ({setShowEdit}) => {
         full_name: user.full_name,
     })
 
-    const handleSaverProfile = async(e)=>{
+    const handleSaveProfile = async(e)=>{
         e.preventDefault();
         try{
             const userData = new FormData();
@@ -36,6 +36,8 @@ const ProfileModal = ({setShowEdit}) => {
 
             const token = await getToken()
             dispatch(updateUser({userData, token}))
+
+            setShowEdit(false)
         }catch(error){
             toast.error(error.message)
         }
@@ -48,7 +50,7 @@ const ProfileModal = ({setShowEdit}) => {
             <h1 className='text-2xl font-bold text-gray-900 mb-6'>Edit profile</h1>
 
             <form className='space-y-4' onSubmit={e=>toast.promise(
-                handleSaverProfile(e),{loading:'Saving...'}
+                handleSaveProfile(e),{loading:'Saving...'}
             )}>
                 {/* Profile Picture  */}
                 <div className='flex flex-col items-start gap-3'>
