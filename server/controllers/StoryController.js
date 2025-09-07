@@ -36,7 +36,7 @@ export const addUserStory = async (req,res) =>{
             data: {storyId : story._id }
         })
 
-        res.json({success:true, story})
+        res.json({success:true })
 
     }catch(error){
         console.log(error);
