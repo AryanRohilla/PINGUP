@@ -19,7 +19,7 @@ export const addUserStory = async (req,res) =>{
                 file: fileBuffer,
                 fileName: media.originalname,
             })
-            media_url = response.url
+            media_url = response.url;
         }
         //create story
         const story = await Story.create({
@@ -36,7 +36,7 @@ export const addUserStory = async (req,res) =>{
             data: {storyId : story._id }
         })
 
-        res.json({success:true})
+        res.json({success:true, story})
 
     }catch(error){
         console.log(error);

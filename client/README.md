@@ -1,12 +1,78 @@
-# React + Vite
+# PingUp - Social Network Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+PingUp is a full-stack social networking platform built with modern web technologies. It allows users to connect, share posts, stories, send messages, and manage connections.
 
-Currently, two official plugins are available:
+## Technologies Used
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Frontend (client/)
+- **React**: UI library for building interactive user interfaces.
+- **Vite**: Fast development server and build tool.
+- **Redux Toolkit**: State management for user, messages, and connections.
+- **Clerk**: Authentication and user management.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+- **Axios**: HTTP client for API requests.
+- **React Router**: Routing for SPA navigation.
+- **Lucide React**: Icon library.
+- **Moment.js**: Date formatting.
 
-## Expanding the ESLint configuration
+### Backend (server/)
+- **Node.js**: JavaScript runtime.
+- **Express**: Web framework for building REST APIs.
+- **MongoDB**: NoSQL database for storing user, post, story, message, and connection data.
+- **Mongoose**: ODM for MongoDB.
+- **ImageKit**: Image upload and transformation.
+- **Multer**: File upload middleware.
+- **Nodemailer**: Email sending.
+- **Inngest**: Event-driven workflows (e.g., scheduled story deletion, notifications).
+- **Clerk Express**: Middleware for authentication.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Project Structure
+
+```
+client/
+  ├── src/
+  │   ├── Components/      # Reusable UI components
+  │   ├── features/        # Redux slices
+  │   ├── pages/           # Route pages
+  │   ├── assets/          # Images and icons
+  │   ├── api/             # Axios instance
+  │   └── app/             # Redux store
+  ├── public/              # Static files
+  ├── index.html           # Main HTML file
+  └── vite.config.js       # Vite configuration
+
+server/
+  ├── controllers/         # Route controllers
+  ├── models/              # Mongoose schemas
+  ├── routes/              # Express routers
+  ├── configs/             # DB, ImageKit, Multer, Nodemailer configs
+  ├── middlewares/         # Auth middleware
+  ├── inngest/             # Event workflows
+  ├── server.js            # Entry point
+  └── package.json         # Dependencies
+```
+
+## Features
+
+- User authentication and profile management
+- Create, edit, and delete posts with images
+- Post creation with images and text
+- Stories (text, image, video) with auto-deletion after 24 hours
+- Messaging (real-time via SSE)
+- Discover users and manage connections (follow, connect, accept)
+- Notifications and email reminders
+- Recent messages and chat box
+- View user profiles and their posts
+
+## Getting Started
+
+1. **Install dependencies**  
+   - `cd client && npm install`
+   - `cd server && npm install`
+
+2. **Configure environment variables**  
+   - Set up `.env` files in both `client/` and `server/` folders.
+
+3. **Run the development servers**  
+   - Client: `npm run dev`  
+   - Server: `npm run server
