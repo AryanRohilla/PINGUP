@@ -222,13 +222,13 @@ export const getUserConnections = async(req,res)=>{
         const {userId} = req.auth()
         const user = await User.findById(userId).populate('connections followers following')
 
-        const connection = user.connections
+        const connections = user.connections
         const followers = user.followers
         const following = user.following
 
         const pendingConnections = (await Connection.find({to_user_id:userId, status:'pending'}).populate('from_user_id')).map(connection=>connection.from_user_id)
 
-        res.json({success:true, connection, followers, following, pendingConnections})
+        res.json({success:true, connections, followers, following, pendingConnections})
 
     }catch(error){
         console.log(error);
@@ -277,7 +277,6 @@ export const getUserProfiles = async (req, res)=>{
             return res.json({success:false, message:"Profile not found"});
         }
         const posts = await Post.find({user:profileId}).populate('user')
-
         res.json({success:true, profile, posts})
     }catch(error){
         console.log(error);

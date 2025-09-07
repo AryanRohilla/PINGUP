@@ -21,7 +21,7 @@ export const sseController = (req,res)=>{
     connections[userId] = res
 
     //Send an initial event to the client
-    res.write ('log:Connected to SSE stream\n\n');
+    res.write('log: Connected to SSE stream\n\n');
 
     //Handle client disconnection
     req.on('close',()=>{
@@ -33,7 +33,7 @@ export const sseController = (req,res)=>{
 
 
 //Send Message
-export const sendMessage = async (req,res)=>{
+export const sendMessage = async (req, res) => {
     try{
         const {userId} = req.auth();
         const {to_user_id, text}= req.body;
@@ -47,9 +47,9 @@ export const sendMessage = async (req,res)=>{
             const response = await imagekit.upload({
                 file:fileBuffer,
                 fileName: image.originalname,
-            })
+            });
             media_url = imagekit.url({
-                path:response.filePath,
+                path: response.filePath,
                 transformation:[
                     {quality:'auto'},
                     {format:'webp'},
@@ -75,7 +75,6 @@ export const sendMessage = async (req,res)=>{
         if(connections[to_user_id]){
             connections[to_user_id].write(`data: ${JSON.stringify(messageWithUserData)}\n\n`)
         }
-
     } catch(error){
         console.log(error)
         res.json({success:false, message : error.message});
@@ -88,7 +87,7 @@ export const getChatMessages = async (req, res) =>{
         const { userId } = req.auth();
         const { to_user_id } = req.body;
 
-        const message = await Message.find({
+        const messages = await Message.find({
             $or: [
                 {from_user_id:userId, to_user_id},
                 {from_user_id:to_user_id, to_user_id:userId},
@@ -97,7 +96,7 @@ export const getChatMessages = async (req, res) =>{
         //mark messages as seen
         await Message.updateMany({from_user_id:to_user_id, to_user_id:userId}, {seen:true})
 
-        res.json({ success:true, message});
+        res.json({ success:true, messages});
     }catch(error){
         res.json({success:false, message:error.message});
     }
@@ -106,7 +105,7 @@ export const getChatMessages = async (req, res) =>{
 export const getUserRecentMessages = async(req,res)=>{
     try {
         const { userId } = req.auth();
-        const messages = await Message.find({to_user_id:userId}.populate('from_user_id to_user_id')).sort({created_at:-1});
+        const messages = await Message.find({to_user_id:userId}).populate('from_user_id to_user_id').sort({created_at:-1});
 
         res.json({success:true ,messages});
         

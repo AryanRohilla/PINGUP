@@ -17,7 +17,7 @@ const Connections = () => {
     const { getToken } = useAuth()
     const dispatch = useDispatch()
  
-    const { connections, pendingConnections, followers, following} = useSelector((state)=>state.connections)
+    const { connections=[], pendingConnections=[], followers=[], following=[]} = useSelector((state)=>state.connections)
 
     const dataArray = [
         {label:'Followers', value:followers, icon:Users},
@@ -78,7 +78,7 @@ const Connections = () => {
         <div className='mb-8 flex flex-wrap gap-6'>
             {dataArray.map((item, index)=>(
                 <div key={index} className='flex flex-col items-center justify-center gap-1 border h-20 w-40 border-gray-200 bg-white shadow rounded-md'>
-                    <b>{item.value?.length || 0}</b>
+                    <b>{item.value.length}</b>
                     <p className='text-slate-600'>{item.label}</p>
                 </div>
             ))}
@@ -110,7 +110,7 @@ const Connections = () => {
                         <p className='text-slate-500'>{user.bio.slice(0,30)}...</p>
                         <div className='flex max-sm:flex-col gap-2 mt-4'>
                             {
-                                <button onClick={()=>navigate(`/profile${user.id}`)} className='w-full p-2 text-sm rounded bg-gradient-to-r from-to-indigo-500 to-purple-700 active:scale-95 transition text-white cursor-pointer'>
+                                <button onClick={()=>navigate(`/profile/${user._id}`)} className='w-full p-2 text-sm rounded bg-gradient-to-r from-to-indigo-500 to-purple-700 active:scale-95 transition text-white cursor-pointer'>
                                     View Profile
                                 </button>
                             }
